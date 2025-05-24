@@ -1,0 +1,24 @@
+#!/bin/bash
+#\033[38;2;R;G;Bm
+
+BATTERY_P=$(cat /sys/class/power_supply/BAT1/capacity)
+BATTERY_STATE=$(cat /sys/class/power_supply/BAT1/status)
+BATCOLOR="#68B0CA"
+ICON="󰂅 "
+
+if [ $BATTERY_P -lt 20 ]; then
+	BATCOLOR="#CE3D27"
+elif [ $BATTERY_P -lt 40 ]; then
+	BATCOLOR="#D38622"
+elif [ $BATTERY_P -lt 60 ]; then
+	BATCOLOR="#D9DC18"
+elif [ $BATTERY_P -lt 80 ]; then
+	BATCOLOR="#36AE54"
+fi
+
+if [ $BATTERY_STATE = "Discharging" ]; then
+	ICON="󰁹 "	
+fi
+echo "$ICON$(~/.config/scripts/genbar.sh $BATTERY_P)"
+echo "$BATTERY_P"
+echo "$BATCOLOR"

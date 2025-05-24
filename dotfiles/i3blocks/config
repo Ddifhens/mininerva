@@ -1,0 +1,16 @@
+[CPU]
+command=~/.config/i3blocks/cpu
+interval=3
+
+[RAM]
+full_text=RAM:
+command= echo "RAM:$(~/.config/scripts/genbar.sh $(free -m | grep 'Mem:' | awk '{ printf "%.0f", $3/$2*100}'))"
+interval=1
+
+[BAT]
+command= ~/.config/i3blocks/battery
+interval=1
+
+[TIME]
+command=date +%T
+interval=1
